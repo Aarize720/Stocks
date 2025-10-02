@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Bon d'achat{% endblock %}
+{% block content %}
+<h3 class="mb-3">{{ title }}</h3>
+<form method="post">
+  {% csrf_token %}
+  <div class="card mb-3">
+    <div class="card-body">
+      {{ form|crispy }}
+    </div>
+  </div>
+  <div class="card mb-3">
+    <div class="card-header">Articles</div>
+    <div class="card-body">
+      {{ formset.management_form }}
+      <table class="table">
+        <thead><tr><th>Produit</th><th>Quantité</th><th>Coût unitaire</th><th>Supprimer</th></tr></thead>
+        <tbody>
+          {% for f in formset %}
+          <tr>
+            <td>{{ f.product }}</td>
+            <td style="width:140px;">{{ f.quantity }}</td>
+            <td style="width:200px;">{{ f.unit_cost }}</td>
+            <td style="width:80px;">{% if f.DELETE %}{{ f.DELETE }}{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">Enregistrer</button>
+  <a href="/purchase-orders/" class="btn btn-secondary ms-2">Annuler</a>
+</form>
+{% endblock %}

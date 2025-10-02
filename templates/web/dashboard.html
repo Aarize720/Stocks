@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord{% endblock %}
+{% block content %}
+<h3 class="mb-4">Tableau de bord</h3>
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-bg-light mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="text-muted">Produits</div>
+            <div class="fs-4 fw-bold">{{ counts.products }}</div>
+          </div>
+          <a class="btn btn-sm btn-outline-primary" href="/products/">Voir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-light mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="text-muted">Fournisseurs</div>
+            <div class="fs-4 fw-bold">{{ counts.suppliers }}</div>
+          </div>
+          <a class="btn btn-sm btn-outline-primary" href="/suppliers/">Voir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-light mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="text-muted">Entrepôts</div>
+            <div class="fs-4 fw-bold">{{ counts.locations }}</div>
+          </div>
+          <a class="btn btn-sm btn-outline-primary" href="/locations/">Voir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-light mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="text-muted">Lignes de stock</div>
+            <div class="fs-4 fw-bold">{{ counts.inventory_items }}</div>
+          </div>
+          <a class="btn btn-sm btn-outline-primary" href="/inventory/">Voir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="mb-3">Stocks bas</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Produit</th>
+      <th>Entrepôt</th>
+      <th>Qté</th>
+      <th>Seuil</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in low_stock %}
+    <tr>
+      <td>{{ item.product.sku }}</td>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.location.code }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.reorder_threshold }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-muted">Aucun stock bas pour le moment.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

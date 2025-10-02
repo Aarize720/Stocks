@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Créer un compte - Stocks{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <h3 class="mb-3">Créer un compte</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-success w-100" type="submit">Créer mon compte</button>
+    </form>
+    <div class="mt-3">
+      <a href="/login/">Déjà un compte ? Se connecter</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

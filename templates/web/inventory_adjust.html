@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Ajuster le stock{% endblock %}
+{% block content %}
+<h3 class="mb-3">Ajuster le stock: {{ item.product.sku }} @ {{ item.location.code }}</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-primary" type="submit">Appliquer</button>
+  <a href="/inventory/" class="btn btn-secondary ms-2">Annuler</a>
+</form>
+{% endblock %}

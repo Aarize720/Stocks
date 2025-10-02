@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Liste - {{ model_name }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="m-0">{{ model_name }}</h3>
+  <a href="{{ create_url }}" class="btn btn-primary">Créer</a>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Objet</th>
+      <th style="width:200px;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in items %}
+    <tr>
+      <td>{{ obj }}</td>
+      <td>
+        <a href="./{{ obj.pk }}/edit/" class="btn btn-sm btn-outline-secondary">Modifier</a>
+        <a href="./{{ obj.pk }}/delete/" class="btn btn-sm btn-outline-danger ms-2">Supprimer</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="2" class="text-muted">Aucun élément</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

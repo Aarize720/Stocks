@@ -1,0 +1,3 @@
+/* Minor spacing and table tweaks */
+.table td, .table th { vertical-align: middle; }
+.navbar-brand { font-weight: bold; }
